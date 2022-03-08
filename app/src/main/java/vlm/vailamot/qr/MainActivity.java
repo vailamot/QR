@@ -3,18 +3,25 @@ package vlm.vailamot.qr;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.BarcodeFormat;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
 public class MainActivity extends AppCompatActivity {
-    Button btn;
+    Button btn,btn2;
     TextView tv;
+    ImageView iv;
+    EditText et;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +29,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btn = (Button) findViewById(R.id.btn);
+        btn2 = (Button) findViewById(R.id.btn2);
         tv = (TextView)  findViewById(R.id.tv);
-
-        ScanOptions options = new ScanOptions();
+        iv = (ImageView) findViewById(R.id.iv);
+        et = (EditText) findViewById(R.id.et);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onButtonClick(view);
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                    Bitmap bitmap = barcodeEncoder.encodeBitmap(et.getText().toString(), BarcodeFormat.QR_CODE, 400, 400);
+                    ImageView imageViewQrCode = (ImageView) findViewById(R.id.iv);
+                    imageViewQrCode.setImageBitmap(bitmap);
+                } catch(Exception e) {
+
+                }
             }
         });
 

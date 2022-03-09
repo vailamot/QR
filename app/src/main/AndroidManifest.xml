@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="vlm.vailamot.qr">
-
+    <queries>
+        <package android:name="com.google.android.gm" />
+        <package android:name="com.android.chrome"/>
+    </queries>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,6 +16,7 @@
             android:name=".MainActivity"
             android:screenOrientation="user"
             android:exported="true">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
